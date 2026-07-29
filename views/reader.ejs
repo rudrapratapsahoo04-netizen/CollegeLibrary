@@ -5,30 +5,23 @@
 <div class="card shadow-lg">
 
 <div class="card-header d-flex justify-content-between align-items-center">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 <h4>📖 <%= book.title %></h4>
 
 <div>
 
-<button id="prev" class="btn btn-primary btn-sm">
-⬅ Prev
-</button>
-
-<span class="mx-3">
-
+<span class="fw-bold">
 Page
-
-<span id="page_num"></span>
-
-/
-
+<span id="page_num"></span> /
 <span id="page_count"></span>
-
 </span>
 
-<button id="next" class="btn btn-primary btn-sm">
-Next ➡
-</button>
+
 
 <button id="zoomIn" class="btn btn-success btn-sm">
 ➕
@@ -58,9 +51,17 @@ class="btn btn-dark btn-sm">
 
 </div>
 
-<div class="card-body text-center">
+<div class="card-body text-center position-relative">
 
-<canvas id="pdf-render"></canvas>
+    <button id="prevArrow" class="pdf-arrow left-arrow">
+        &#10094;
+    </button>
+
+    <canvas id="pdf-render"></canvas>
+
+    <button id="nextArrow" class="pdf-arrow right-arrow">
+        &#10095;
+    </button>
 
 </div>
 
@@ -139,23 +140,23 @@ renderPage(pageNum);
 
 });
 
-document.getElementById("prev").onclick = () => {
+document.getElementById("prevArrow").onclick=()=>{
 
-    if (pageNum <= 1) return;
+if(pageNum<=1)return;
 
-    pageNum--;
+pageNum--;
 
-    renderPage(pageNum, "left");
+renderPage(pageNum,"left");
 
 };
 
-document.getElementById("next").onclick = () => {
+document.getElementById("nextArrow").onclick=()=>{
 
-    if (pageNum >= pdfDoc.numPages) return;
+if(pageNum>=pdfDoc.numPages)return;
 
-    pageNum++;
+pageNum++;
 
-    renderPage(pageNum, "right");
+renderPage(pageNum,"right");
 
 };
 document.getElementById("zoomIn").onclick=()=>{
