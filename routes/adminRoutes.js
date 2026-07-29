@@ -6,7 +6,7 @@ const upload = require("../config/multer");
 const wrapAsync=require("../utils/wrapAsync");
 
 const ExpressError=require("../utils/ExpressError");
-const Notification = require("../models/Notification");
+const Notification = require("../models/notification");
 const cloudinary = require("../config/cloudinary");
 const imagekit = require("../config/imagekit");
 const fs = require("fs");
