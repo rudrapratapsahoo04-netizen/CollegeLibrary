@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+        <link rel="manifest" href="/manifest.json">
+
+     <meta name="theme-color" content="#0d6efd">
+
+      <link rel="apple-touch-icon" href="/icons/logo.png">
+      <link rel="icon" type="image/png" href="/icons/favicon.png">
+
+     <title><%= typeof title !== "undefined" ? title : "College Library" %></title>
+
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+         crossorigin="anonymous">
+         <link
+       rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+    <link rel="manifest" href="/manifest.json">
+
+</head>
+<body>
+    <!-- ================= PRELOADER ================= -->
+
+<div id="preloader">
+
+    <div class="loader-box">
+
+        <img src="/images/logo.png" class="loader-logo">
+
+        <h2>
+
+            College Library
+
+        </h2>
+
+        <div class="loader-circle"></div>
+
+        <p>
+
+            Loading Library...
+
+        </p>
+
+    </div>
+
+</div>
+
+    <%- include("../partials/navbar") %>
+
+   <main class="m-0 p-0">
+
+    <%- body %>
+
+</main>
+
+    <%- include("../partials/footer") %>
+
+   <!-- Install App Popup -->
+
+<div id="installPopup" class="install-popup">
+
+    <div class="install-card">
+
+        <img src="/icons/icon-192.png" width="80">
+
+        <h3>📚 College Library</h3>
+
+        <p>
+
+            Install our App for Faster Access,
+            Offline Reading & Better Experience.
+
+        </p>
+
+        <button id="installBtn" class="btn btn-primary">
+
+            Install App
+
+        </button>
+
+        <button id="closeInstall" class="btn btn-light">
+
+            Later
+
+        </button>
+
+    </div>
+
+</div>
+<!-- Install App Modal -->
+
+<div class="modal fade" id="installModal" tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content rounded-4 shadow">
+
+            <div class="modal-body text-center p-5">
+
+                <img src="/icons/icon-192.png" width="90" class="mb-3">
+
+                <h3>📚 College Library</h3>
+
+                <p class="text-muted">
+
+                    Install the College Library App
+
+                    <br>
+
+                    ✔ Faster Access
+
+                    <br>
+
+                    ✔ Offline Reading
+
+                    <br>
+
+                    ✔ Better Experience
+
+                </p>
+
+                <button id="installNow" class="btn btn-primary btn-lg w-100 mb-2">
+
+                    📲 Install Now
+
+                </button>
+
+                <button class="btn btn-outline-secondary w-100"
+
+                    data-bs-dismiss="modal">
+
+                    Maybe Later
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    <script src="/js/script.js"></script>
+
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+      <script>
+
+window.addEventListener("load", function () {
+
+    const feedbackDone = localStorage.getItem("feedbackSubmitted");
+
+    if (!feedbackDone) {
+
+        setTimeout(function () {
+
+            if (confirm("⭐ Enjoying our College Library?\n\nPlease give your valuable feedback.")) {
+
+                window.location.href = "/feedback";
+
+            }
+
+        }, 3000);
+
+    }
+
+});
+
+if(localStorage.getItem("theme")==="dark"){
+
+    document.body.classList.add("dark-mode");
+
+}
+
+
+if("serviceWorker" in navigator){
+
+window.addEventListener("load",()=>{
+
+navigator.serviceWorker.register("/sw.js")
+
+.then(()=>{
+
+console.log("PWA Installed");
+
+})
+
+.catch(err=>{
+
+console.log(err);
+
+});
+
+});
+
+}
+
+
+
+
+
+</script>
+
+</body>
+
+
+</html>

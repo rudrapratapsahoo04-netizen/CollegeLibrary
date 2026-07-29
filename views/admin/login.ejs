@@ -1,0 +1,47 @@
+<% layout("layouts/boilerplate", { title: "Admin Login" }) %>
+
+<div class="admin-login-page">
+
+    <div class="login-card">
+
+        <div class="login-header">
+            <div class="icon">
+                <img src="/images/logo.png" width="55" height="55" class="me-2 rounded-circle">
+            </div>
+            <h2>Admin Login</h2>
+            <p>College Library Management System</p>
+        </div>
+
+        <form action="/admin/login" method="POST">
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Enter Admin Email"
+                    required>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter Password"
+                    required>
+            </div>
+
+            <button class="btn login-btn w-100">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

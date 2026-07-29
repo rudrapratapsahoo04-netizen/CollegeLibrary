@@ -1,0 +1,123 @@
+<% layout("layouts/boilerplate", { title: "My Wishlist" }) %>
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>❤️ My Wishlist</h2>
+
+        <a href="/books" class="btn btn-primary">
+
+            📚 Browse Books
+
+        </a>
+
+    </div>
+
+    <% if (wishlist.length === 0) { %>
+
+        <div class="alert alert-info text-center">
+
+            <h4>No Books in Wishlist ❤️</h4>
+
+            <p>Add your favourite books.</p>
+
+        </div>
+
+    <% } else { %>
+
+        <div class="row">
+
+            <% wishlist.forEach(item => { %>
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="card shadow h-100">
+
+                        <img
+                            src="<%= item.book.image %>"
+                            class="card-img-top"
+                            height="320"
+                            style="object-fit:cover;">
+
+                        <div class="card-body">
+
+                            <h5 class="fw-bold">
+
+                                <%= item.book.title %>
+
+                            </h5>
+
+                            <p>
+
+                                <strong>Author:</strong>
+
+                                <%= item.book.author %>
+
+                            </p>
+
+                            <p>
+
+                                <strong>Category:</strong>
+
+                                <%= item.book.category %>
+
+                            </p>
+
+                            <% if(item.book.available){ %>
+
+                                <span class="badge bg-success">
+
+                                    Available
+
+                                </span>
+
+                            <% } else { %>
+
+                                <span class="badge bg-danger">
+
+                                    Unavailable
+
+                                </span>
+
+                            <% } %>
+
+                        </div>
+
+                        <div class="card-footer bg-white">
+
+                            <a
+                                href="/books/<%= item.book._id %>"
+                                class="btn btn-primary btn-sm">
+
+                                👁 View Details
+
+                            </a>
+
+                            <form
+                                action="/wishlist/<%= item._id %>?_method=DELETE"
+                                method="POST"
+                                class="d-inline">
+
+                                <button
+                                    class="btn btn-danger btn-sm">
+
+                                    🗑 Remove
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    <% } %>
+
+</div>

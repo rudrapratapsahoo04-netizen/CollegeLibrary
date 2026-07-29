@@ -1,0 +1,318 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container-fluid mt-5">
+
+    <div class="row">
+
+        <!-- Sidebar -->
+
+        <div class="col-md-2 sidebar">
+
+            <h3 class="text-center mb-4">
+                <img src="/images/logo.png" alt="Library Logo" width="55" height="55" class="me-2 rounded-circle"> Library
+            </h3>
+
+            <a href="/admin/dashboard">🏠 Dashboard</a>
+
+            <a href="/admin/books/new">➕ Add Book</a>
+
+            <a href="/admin/books">📖 Manage Books</a>
+
+            <a href="/">🌐 Website</a>
+
+            <a href="/admin/complaints" class="btn btn-danger mb-2">
+                📢 Manage Complaints
+            </a>
+
+            <a href="/admin/contact-messages" class="btn btn-primary mb-2">
+                📩 Contact Messages
+            </a>
+
+            <a href="/admin/feedbacks" class="btn btn-warning mb-2">
+                💬 Feedback
+            </a>
+
+            <a href="/admin/logout" class="btn btn-dark">
+                🚪 Logout
+            </a>
+
+        </div>
+
+        <!-- Main Content -->
+
+        <div class="col-md-10 p-4">
+
+            <h2 class="mb-4 fw-bold">
+                📊 Admin Dashboard
+            </h2>
+
+            <!-- First Row -->
+
+            <div class="row">
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="dashboard-card">
+
+                        <h3>📚 <%= totalBooks %></h3>
+
+                        <p>Total Books</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="dashboard-card success">
+
+                        <h3>✅ <%= availableBooks %></h3>
+
+                        <p>Available Books</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="dashboard-card danger">
+
+                        <h3>❌ <%= unavailableBooks %></h3>
+
+                        <p>Unavailable Books</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Second Row -->
+
+            <div class="row">
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="dashboard-card">
+
+                        <h3>👀 <%= totalViews %></h3>
+
+                        <p>Total Views</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="dashboard-card">
+
+                        <h3>❤️ <%= totalWishlist %></h3>
+
+                        <p>Total Wishlist</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="dashboard-card">
+
+                        <h3>⭐ <%= totalRatings %></h3>
+
+                        <p>Total Ratings</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Analytics Cards -->
+
+<div class="row mt-4">
+
+    <!-- Top Rated -->
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-header bg-warning fw-bold">
+
+                ⭐ Top Rated Books
+
+            </div>
+
+            <ul class="list-group list-group-flush">
+
+                <% if(topRated.length){ %>
+
+                    <% topRated.forEach(book=>{ %>
+
+                        <li class="list-group-item d-flex justify-content-between">
+
+                            <span><%= book.title %></span>
+
+                            <strong>
+
+                                ⭐ <%= (book.rating || 0).toFixed(1) %>
+
+                            </strong>
+
+                        </li>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <li class="list-group-item text-center">
+
+                        No Data
+
+                    </li>
+
+                <% } %>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- Most Viewed -->
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-header bg-info text-white fw-bold">
+
+                👀 Most Viewed Books
+
+            </div>
+
+            <ul class="list-group list-group-flush">
+
+                <% if(mostViewed.length){ %>
+
+                    <% mostViewed.forEach(book=>{ %>
+
+                        <li class="list-group-item d-flex justify-content-between">
+
+                            <span><%= book.title %></span>
+
+                            <strong><%= book.views || 0 %></strong>
+
+                        </li>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <li class="list-group-item text-center">
+
+                        No Data
+
+                    </li>
+
+                <% } %>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- Wishlist -->
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card shadow h-100">
+
+            <div class="card-header bg-danger text-white fw-bold">
+
+                ❤️ Most Wishlisted
+
+            </div>
+
+            <ul class="list-group list-group-flush">
+
+                <% if(mostWishlisted.length){ %>
+
+                    <% mostWishlisted.forEach(book=>{ %>
+
+                        <li class="list-group-item d-flex justify-content-between">
+
+                            <span><%= book.title %></span>
+
+                            <strong><%= book.wishlistCount || 0 %></strong>
+
+                        </li>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <li class="list-group-item text-center">
+
+                        No Data
+
+                    </li>
+
+                <% } %>
+
+
+     
+
+<!-- Charts -->
+
+<div class="row mt-4">
+
+    <div class="col-md-6 mb-4">
+
+        <div class="card shadow">
+
+            <div class="card-body">
+
+                <h5 class="text-center mb-3">
+
+                    👀 Most Viewed Books
+
+                </h5>
+
+                <canvas id="viewsChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6 mb-4">
+
+        <div class="card shadow">
+
+            <div class="card-body">
+
+                <h5 class="text-center mb-3">
+
+                    ⭐ Top Rated Books
+
+                </h5>
+
+                <canvas id="ratingChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

@@ -1,0 +1,103 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container py-5">
+
+<h2 class="mb-4">
+Add New Book
+</h2>
+
+<form
+action="/admin/books"
+method="POST"
+enctype="multipart/form-data">
+
+<div class="mb-3">
+
+<label>Book Title</label>
+
+<input
+type="text"
+name="title"
+class="form-control"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Author</label>
+
+<input
+type="text"
+name="author"
+class="form-control"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Category</label>
+
+<input
+type="text"
+name="category"
+class="form-control"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label>Book Cover</label>
+
+<input
+type="file"
+name="image"
+class="form-control"
+accept="image/*">
+
+</div>
+
+<div class="mb-3">
+
+<label>PDF eBook</label>
+
+<input
+type="file"
+name="ebook"
+class="form-control"
+accept=".pdf">
+
+</div>
+
+<div class="mb-3">
+
+<label>Status</label>
+
+<select
+name="available"
+class="form-select">
+
+<option value="true">
+Available
+</option>
+
+<option value="false">
+Unavailable
+</option>
+
+</select>
+
+</div>
+
+<button
+class="btn btn-primary">
+
+Save Book
+
+</button>
+
+</form>
+
+</div>

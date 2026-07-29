@@ -1,0 +1,96 @@
+<% layout("layouts/boilerplate", { title: "Contact Messages" }) %>
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>📩 Contact Messages</h2>
+
+        <a href="/admin/dashboard" class="btn btn-secondary">
+
+            ⬅ Dashboard
+
+        </a>
+
+    </div>
+
+    <% if(contacts.length === 0){ %>
+
+        <div class="alert alert-info text-center">
+
+            <h4>No Messages Found</h4>
+
+        </div>
+
+    <% } else { %>
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-hover shadow">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <% contacts.forEach(contact => { %>
+
+                <tr>
+
+                    <td><%= contact.name %></td>
+
+                    <td><%= contact.email %></td>
+
+                    <td><%= contact.subject %></td>
+
+                    <td><%= contact.message %></td>
+
+                    <td>
+
+                        <%= contact.createdAt.toLocaleDateString() %>
+
+                    </td>
+
+                    <td>
+
+                        <form
+                            action="/admin/contact-messages/<%= contact._id %>?_method=DELETE"
+                            method="POST">
+
+                            <button
+                                class="btn btn-danger btn-sm"
+                                onclick="return confirm('Delete this message?')">
+
+                                🗑 Delete
+
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <% } %>
+
+</div>

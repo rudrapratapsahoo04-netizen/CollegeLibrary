@@ -1,0 +1,209 @@
+<% layout("layouts/boilerplate",{title:"Manage Books"}) %>
+
+<div class="container-fluid py-4 admin-books">
+
+<div class="row g-3 align-items-center mb-4">
+
+<div class="col-lg-4 col-md-4 col-12">
+
+<h2 class="page-title">
+
+📚 Manage Books
+
+</h2>
+
+</div>
+
+<div class="col-lg-5 col-md-5 col-12">
+
+<input
+type="text"
+id="searchBook"
+class="form-control search-input"
+placeholder="🔍 Search Book">
+
+</div>
+
+<div class="col-lg-3 col-md-3 col-12">
+
+<a href="/admin/books/new"
+class="btn btn-success add-btn w-100">
+
+➕ Add Book
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="table-responsive admin-table">
+
+<table class="table align-middle table-hover">
+
+<thead>
+
+<tr>
+
+<th>Cover</th>
+
+<th>Title</th>
+
+<th>Author</th>
+
+<th>Category</th>
+
+<th>Status</th>
+
+<th>Rating</th>
+
+<th>Views</th>
+
+<th>Wishlist</th>
+
+<th>PDF</th>
+
+<th class="sticky-action">
+
+Action
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<% books.forEach(book=>{ %>
+
+<tr>
+
+<td>
+
+<img
+src="<%= book.image %>"
+class="book-cover">
+
+</td>
+
+<td>
+
+<strong>
+
+<%= book.title %>
+
+</strong>
+
+</td>
+
+<td>
+
+<%= book.author %>
+
+</td>
+
+<td>
+
+<span class="badge bg-primary">
+
+<%= book.category %>
+
+</span>
+
+</td>
+
+<td>
+
+<% if(book.available){ %>
+
+<span class="badge bg-success">
+
+Available
+
+</span>
+
+<% }else{ %>
+
+<span class="badge bg-danger">
+
+Unavailable
+
+</span>
+
+<% } %>
+
+</td>
+
+<td>
+
+⭐ <%= (book.rating||0).toFixed(1) %>
+
+</td>
+
+<td>
+
+👁 <%= book.views||0 %>
+
+</td>
+
+<td>
+
+❤️ <%= book.wishlistCount||0 %>
+
+</td>
+
+<td>
+
+<a
+href="<%= book.ebook %>"
+target="_blank"
+class="btn btn-primary btn-sm">
+
+📄 View
+
+</a>
+
+</td>
+
+<td class="sticky-action">
+
+<div class="d-flex gap-2">
+
+<a
+href="/admin/books/<%= book._id %>/edit"
+class="btn btn-warning btn-sm">
+
+✏
+
+</a>
+
+<form
+action="/admin/books/<%= book._id %>?_method=DELETE"
+method="POST">
+
+<button
+class="btn btn-danger btn-sm">
+
+🗑
+
+</button>
+
+</form>
+
+</div>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>

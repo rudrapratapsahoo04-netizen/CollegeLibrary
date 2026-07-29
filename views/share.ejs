@@ -1,0 +1,29 @@
+<% layout("layouts/boilerplate", { title: "Share" }) %>
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4 text-center">
+
+        <h2>📤 Share Our Library</h2>
+
+        <p class="mt-3">
+            Share this library website with your friends.
+        </p>
+
+        <input
+            type="text"
+            class="form-control mb-3"
+            value="http://localhost:3000"
+            readonly>
+
+        <button
+            class="btn btn-success"
+            onclick="navigator.clipboard.writeText('http://localhost:3000')">
+
+            Copy Link
+
+        </button>
+
+    </div>
+
+</div>

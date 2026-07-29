@@ -1,0 +1,166 @@
+<% layout("layouts/boilerplate", { title: "Rate Our Library" }) %>
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-warning text-center">
+
+                    <h2 class="mb-0">⭐ Rate Our Library</h2>
+
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="card shadow mb-4 border-0">
+
+    <div class="card-body text-center">
+
+        <h3 class="text-warning">
+
+            ⭐ <%= average %> / 5
+
+        </h3>
+
+        <p class="text-muted">
+
+            Based on <strong><%= ratings.length %></strong> Reviews
+
+        </p>
+
+    </div>
+
+</div>
+
+                    <form action="/rating" method="POST">
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Your Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="name"
+                                class="form-control"
+                                placeholder="Enter your name"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Give Rating
+                            </label>
+
+                            <select
+                                name="rating"
+                                class="form-select"
+                                required>
+
+                                <option value="">Select Rating</option>
+                                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                                <option value="4">⭐⭐⭐⭐ Very Good</option>
+                                <option value="3">⭐⭐⭐ Good</option>
+                                <option value="2">⭐⭐ Fair</option>
+                                <option value="1">⭐ Poor</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+                                Review
+                            </label>
+
+                            <textarea
+                                name="message"
+                                class="form-control"
+                                rows="4"
+                                placeholder="Write your feedback..."></textarea>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-warning w-100">
+
+                            ⭐ Submit Rating
+
+                        </button>
+
+                    </form>
+                    <hr class="my-5">
+
+<h3 class="mb-4">
+
+    💬 Recent Reviews
+
+</h3>
+
+<% if(ratings.length === 0){ %>
+
+<div class="alert alert-info">
+
+    No Reviews Yet.
+
+</div>
+
+<% } else { %>
+
+    <% ratings.forEach(review => { %>
+
+        <div class="card shadow-sm mb-3">
+
+            <div class="card-body">
+
+                <h5>
+
+                    👤 <%= review.name %>
+
+                </h5>
+
+                <p class="text-warning fs-5">
+
+                    <% for(let i = 1; i <= review.rating; i++){ %>
+                        ⭐
+                    <% } %>
+
+                </p>
+
+                <p>
+
+                    <%= review.message %>
+
+                </p>
+
+                <small class="text-muted">
+
+                    <%= review.createdAt.toLocaleDateString() %>
+
+                </small>
+
+            </div>
+
+        </div>
+
+    <% }) %>
+
+<% } %>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

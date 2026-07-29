@@ -1,0 +1,51 @@
+<% layout("layouts/boilerplate",{title:"Notifications"}) %>
+
+<div class="container py-5">
+
+    <h2 class="mb-4">
+
+        🔔 Notifications
+
+    </h2>
+
+    <% if(notifications.length===0){ %>
+
+        <div class="alert alert-info">
+
+            No Notifications Found.
+
+        </div>
+
+    <% } %>
+
+    <% notifications.forEach(notification=>{ %>
+
+        <div class="card shadow-sm mb-3">
+
+            <div class="card-body">
+
+                <h5>
+
+                    <%= notification.title %>
+
+                </h5>
+
+                <p>
+
+                    <%= notification.message %>
+
+                </p>
+
+                <small class="text-muted">
+
+                    <%= notification.createdAt.toLocaleString() %>
+
+                </small>
+
+            </div>
+
+        </div>
+
+    <% }) %>
+
+</div>

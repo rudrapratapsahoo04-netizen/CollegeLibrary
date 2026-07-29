@@ -1,0 +1,250 @@
+<% layout("layouts/boilerplate", { title: book.title }) %>
+
+<%
+let avgRating = 0;
+
+if (book.ratings && book.ratings.length > 0) {
+    avgRating =
+        book.ratings.reduce((sum, r) => sum + r.value, 0) /
+        book.ratings.length;
+}
+%>
+
+<div class="container py-5">
+
+    <div class="row">
+
+        <!-- Book Image -->
+        <div class="col-md-4 text-center">
+
+            <img
+                src="<%= book.image %>"
+                class="img-fluid rounded shadow"
+                style="max-height:500px;object-fit:cover;">
+
+        </div>
+
+        <!-- Book Details -->
+        <div class="col-md-8">
+
+            <h2 class="fw-bold">
+                <%= book.title %>
+            </h2>
+
+            <hr>
+
+            <h5>
+                <strong>Author :</strong>
+                <%= book.author %>
+            </h5>
+
+            <h5>
+                <strong>Category :</strong>
+                <%= book.category %>
+            </h5>
+
+            <% if(book.description){ %>
+
+                <p class="mt-3">
+                    <strong>Description :</strong><br>
+                    <%= book.description %>
+                </p>
+
+            <% } %>
+
+            <h5 class="mt-3">
+
+                Status :
+
+                <% if(book.available){ %>
+
+                    <span class="badge bg-success">
+                        Available
+                    </span>
+
+                <% } else { %>
+
+                    <span class="badge bg-danger">
+                        Unavailable
+                    </span>
+
+                <% } %>
+
+            </h5>
+
+            <hr>
+
+            <!-- Rating -->
+
+            <h4 class="text-warning">
+
+                ⭐ <%= avgRating.toFixed(1) %> / 5
+
+            </h4>
+
+            <p>
+
+                <%= book.ratings ? book.ratings.length : 0 %> Ratings
+
+            </p>
+
+            <hr>
+
+            <!-- Rating Form -->
+
+            <form
+                action="/books/<%= book._id %>/rating"
+                method="POST"
+                class="mb-4">
+
+                <label class="form-label fw-bold">
+
+                    Give Your Rating
+
+                </label>
+
+                <select
+                    name="rating"
+                    class="form-select mb-3">
+
+                    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                    <option value="4">⭐⭐⭐⭐ (4)</option>
+                    <option value="3">⭐⭐⭐ (3)</option>
+                    <option value="2">⭐⭐ (2)</option>
+                    <option value="1">⭐ (1)</option>
+
+                </select>
+
+                <button
+                    class="btn btn-warning">
+
+                    ⭐ Submit Rating
+
+                </button>
+
+            </form>
+
+            <div class="d-flex gap-2 flex-wrap">
+
+                <a href="/books/<%= book._id %>/read"
+                          class="btn btn-success">
+
+                      📖 Read Book
+
+                 </a>
+
+                <a
+                    href="<%= book.ebook %>"
+                    download
+                    class="btn btn-success">
+
+                    ⬇ Download PDF
+
+                </a>
+
+                <a
+                    href="/books"
+                    class="btn btn-secondary">
+
+                    ← Back
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= AI CHATBOT ================= -->
+
+<div class="text-center mt-5">
+
+    <button id="chatbot-btn" class="btn btn-primary btn-lg rounded-pill px-4 shadow">
+
+        🤖 Ask AI Librarian
+
+    </button>
+
+</div>
+
+<div id="chatbot-box">
+
+    <!-- Header -->
+
+    <div class="chat-header">
+
+        <div class="d-flex justify-content-between align-items-center w-100">
+
+            <span>🤖 AI Librarian</span>
+
+            <button id="closeChat" class="chat-close">
+
+                ✖
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Chat Body -->
+
+    <div id="chat-body">
+
+        <div class="bot-msg">
+
+            👋 Hello <br><br>
+
+            Welcome to <b>College Library</b> 📚
+
+            <br><br>
+
+            You can ask me:
+
+            <br>
+
+            📖 Book name
+
+            <br>
+
+            👨 Author name
+
+            <br>
+
+            📂 Category
+
+            <br>
+
+            ⭐ Best books
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="chat-footer">
+
+        <input
+
+            type="text"
+
+            id="userMessage"
+
+            placeholder="Ask anything about books..."
+
+            autocomplete="off"
+
+        >
+
+        <button id="sendBtn">
+
+            ➤
+
+        </button>
+
+    </div>
+
+</div>

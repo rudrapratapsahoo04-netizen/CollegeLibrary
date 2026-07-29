@@ -1,0 +1,143 @@
+<% layout("layouts/boilerplate", { title: "Manage Complaints" }) %>
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>📢 Manage Complaints</h2>
+
+        <a href="/admin/dashboard" class="btn btn-secondary">
+
+            ⬅ Dashboard
+
+        </a>
+
+    </div>
+
+    <% if(complaints.length === 0){ %>
+
+        <div class="alert alert-info text-center">
+
+            <h4>No Complaints Found</h4>
+
+        </div>
+
+    <% } else { %>
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-hover align-middle shadow">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>Name</th>
+
+                    <th>Email</th>
+
+                    <th>Subject</th>
+
+                    <th>Message</th>
+
+                    <th>Status</th>
+
+                    <th>Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <% complaints.forEach(c => { %>
+
+                <tr>
+
+                    <td><%= c.name %></td>
+
+                    <td><%= c.email %></td>
+
+                    <td><%= c.subject %></td>
+
+                    <td><%= c.message %></td>
+
+                    <td>
+
+                        <% if(c.status === "Pending"){ %>
+
+                            <span class="badge bg-warning text-dark">
+
+                                Pending
+
+                            </span>
+
+                        <% } else { %>
+
+                            <span class="badge bg-success">
+
+                                Resolved
+
+                            </span>
+
+                        <% } %>
+
+                    </td>
+
+                    <td>
+
+                        <%= c.createdAt.toLocaleDateString() %>
+
+                    </td>
+
+                    <td>
+
+                        <% if(c.status === "Pending"){ %>
+
+                        <form
+                            action="/admin/complaints/<%= c._id %>?_method=PUT"
+                            method="POST"
+                            class="d-inline">
+
+                            <button class="btn btn-success btn-sm">
+
+                                ✅ Resolve
+
+                            </button>
+
+                        </form>
+
+                        <% } %>
+
+                        <form
+                            action="/admin/complaints/<%= c._id %>?_method=DELETE"
+                            method="POST"
+                            class="d-inline">
+
+                            <button
+                                class="btn btn-danger btn-sm"
+                                onclick="return confirm('Delete this complaint?')">
+
+                                🗑 Delete
+
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <% } %>
+
+</div>
